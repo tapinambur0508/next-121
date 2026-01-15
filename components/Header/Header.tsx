@@ -24,7 +24,7 @@ function Header() {
               </li>
               <li>
                 <Link
-                  href="/notes"
+                  href="/notes/filter/all"
                   className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
                 >
                   Notes

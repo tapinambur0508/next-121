@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function Footer() {
   return (
     <footer className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mt-auto">
@@ -8,36 +10,36 @@ function Footer() {
           </div>
 
           <nav className="flex flex-wrap justify-center gap-6">
-            <a
+            <Link
               href="/about"
               className="text-white/90 hover:text-white transition-colors duration-200 text-sm font-medium"
             >
               About
-            </a>
-            <a
-              href="/notes"
+            </Link>
+            <Link
+              href="/notes/filter/all"
               className="text-white/90 hover:text-white transition-colors duration-200 text-sm font-medium"
             >
               Notes
-            </a>
-            <a
+            </Link>
+            <Link
               href="/profile"
               className="text-white/90 hover:text-white transition-colors duration-200 text-sm font-medium"
             >
               Profile
-            </a>
-            <a
+            </Link>
+            <Link
               href="/contact"
               className="text-white/90 hover:text-white transition-colors duration-200 text-sm font-medium"
             >
               Contact
-            </a>
-            <a
+            </Link>
+            <Link
               href="/privacy"
               className="text-white/90 hover:text-white transition-colors duration-200 text-sm font-medium"
             >
               Privacy
-            </a>
+            </Link>
           </nav>
 
           <div className="flex gap-4">
