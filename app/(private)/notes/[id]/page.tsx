@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import {
   QueryClient,
   HydrationBoundary,
@@ -11,6 +13,27 @@ import NoteDetailsClient from "./NoteDetails.client";
 interface NoteProps {
   params: Promise<{ id: string }>;
 }
+
+export const generateMetadata = async ({
+  params,
+}: NoteProps): Promise<Metadata> => {
+  const { id } = await params;
+  const note = await getNote(id);
+
+  return {
+    title: note.title,
+    description: note.content,
+    openGraph: {
+      title: note.title,
+      description: note.content,
+      images: [
+        {
+          url: "http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg",
+        },
+      ],
+    },
+  };
+};
 
 async function Note({ params }: NoteProps) {
   const { id } = await params;

@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Control panel - NotHub",
+  keywords: undefined,
+};
+
 function ControlPanel() {
   return (
     <div>
