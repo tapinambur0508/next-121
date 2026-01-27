@@ -51,6 +51,22 @@ function Header() {
               <li>
                 <Counter />
               </li>
+              <li>
+                <Link
+                  href="/sign-in"
+                  className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
+                >
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/sign-up"
+                  className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
+                >
+                  Register
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>

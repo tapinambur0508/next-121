@@ -1,10 +1,11 @@
 import axios from "axios";
 
-import type { Note } from "@/types/note";
-import type { Category, CreateNotePayload } from "@/types/category";
+import type { User, RegisterRequest, LoginRequest } from "@/types/auth";
+import type { Note, CreateNotePayload } from "@/types/note";
+import type { Category } from "@/types/category";
 
 const API = axios.create({
-  baseURL: "https://next-v1-notes-api.goit.study",
+  baseURL: "http://localhost:3000/api",
 });
 
 export async function getNotes(categoryId?: string) {
@@ -35,6 +36,26 @@ export async function createNote(payload: CreateNotePayload) {
 
 export async function getCategories() {
   const { data } = await API.get<Category[]>("/categories");
+
+  return data;
+}
+
+export async function register(payload: RegisterRequest) {
+  const { data } = await API.post<User>("/auth/register", payload, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return data;
+}
+
+export async function login(payload: LoginRequest) {
+  const { data } = await API.post<User>("/auth/login", payload, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   return data;
 }
