@@ -7,7 +7,12 @@ async function NotesSidebar() {
 
   return (
     <ul>
-      <Link href="/notes/filter/all">All Notes</Link>
+      <li>
+        <Link href="/notes/actions/create">Create note</Link>
+      </li>
+      <li>
+        <Link href="/notes/filter/all">All Notes</Link>
+      </li>
       {categories.map((category) => (
         <li key={category.id}>
           <Link href={`/notes/filter/${category.id}`}>{category.name}</Link>

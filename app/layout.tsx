@@ -45,7 +45,7 @@ export default function RootLayout({
         <TanstackProvider>
           <Header />
 
-          <div className="container mx-auto">
+          <div className="container mx-auto my-2">
             {children}
             {modal}
           </div>

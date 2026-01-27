@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import Counter from "@/components/Counter/Counter";
+
 function Header() {
   return (
     <header className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-lg">
@@ -45,6 +47,9 @@ function Header() {
                 >
                   Control Panel
                 </Link>
+              </li>
+              <li>
+                <Counter />
               </li>
             </ul>
           </nav>

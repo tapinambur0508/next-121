@@ -1,9 +1,13 @@
 import Image from "next/image";
 
+import Counter from "@/components/Counter/Counter";
+
 export default function Home() {
   return (
     <div>
       <h1>Home</h1>
+
+      <Counter />
 
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

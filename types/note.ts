@@ -4,3 +4,9 @@ export interface Note {
   content: string;
   category: string;
 }
+
+export interface CreateNotePayload {
+  title: string;
+  content: string;
+  categoryId: string;
+}
