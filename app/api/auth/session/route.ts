@@ -6,17 +6,22 @@ import { api } from "../../api";
 
 import type { APIError } from "../../api";
 
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
+export async function GET() {
+  const cookieStore = await cookies();
 
-    const apiResponse = await api.post("/auth/register", body, {
+  const accessToken = cookieStore.get("accessToken");
+  const refreshToken = cookieStore.get("refreshToken");
+
+  if (accessToken) {
+    return NextResponse.json({ success: true });
+  }
+
+  if (refreshToken) {
+    const apiResponse = await api.get("/auth/session", {
       headers: {
-        "Content-Type": "application/json",
+        Cookie: cookieStore.toString(),
       },
     });
-
-    const cookieStore = await cookies();
 
     const setCookie = apiResponse.headers["set-cookie"];
 
@@ -40,19 +45,10 @@ export async function POST(request: NextRequest) {
           cookieStore.set("refreshToken", parsed.refreshToken, options);
         }
       }
-    }
 
-    return NextResponse.json(apiResponse.data, { status: 201 });
-  } catch (error) {
-    return NextResponse.json(
-      {
-        error:
-          (error as APIError).response?.data?.error ??
-          (error as APIError).message,
-      },
-      {
-        status: (error as APIError).status,
-      },
-    );
+      return NextResponse.json({ success: true });
+    }
   }
+
+  return NextResponse.json({ success: false });
 }

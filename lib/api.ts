@@ -6,6 +6,7 @@ import type { Category } from "@/types/category";
 
 const API = axios.create({
   baseURL: "http://localhost:3000/api",
+  withCredentials: true,
 });
 
 export async function getNotes(categoryId?: string) {
@@ -58,4 +59,20 @@ export async function login(payload: LoginRequest) {
   });
 
   return data;
+}
+
+export async function checkSession() {
+  const { data } = await API.get<{ success: boolean }>("/auth/session");
+
+  return data.success;
+}
+
+export async function getMe() {
+  const { data } = await API.get<User>("/auth/me");
+
+  return data;
+}
+
+export async function logout() {
+  await API.post("/auth/logout");
 }

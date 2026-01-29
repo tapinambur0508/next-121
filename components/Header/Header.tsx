@@ -1,8 +1,23 @@
-import Link from "next/link";
+"use client";
 
-import Counter from "@/components/Counter/Counter";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { useAuthStore } from "@/stores/authStore";
+
+import { logout } from "@/lib/api";
 
 function Header() {
+  const router = useRouter();
+
+  const { isAuthenticated, user, clearIsAuthenticated } = useAuthStore();
+
+  const handleLogout = async () => {
+    await logout();
+    clearIsAuthenticated();
+    router.push("/sign-in");
+  };
+
   return (
     <header className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-lg">
       <div className="container mx-auto px-4 py-4">
@@ -24,49 +39,53 @@ function Header() {
                   About
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/notes/filter/all"
-                  className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
-                >
-                  Notes
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/profile"
-                  className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
-                >
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/control-panel"
-                  className="ml-2 px-5 py-2 bg-white text-purple-600 hover:bg-gray-100 rounded-lg transition-all duration-200 font-semibold shadow-md hover:shadow-lg"
-                >
-                  Control Panel
-                </Link>
-              </li>
-              <li>
-                <Counter />
-              </li>
-              <li>
-                <Link
-                  href="/sign-in"
-                  className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
-                >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/sign-up"
-                  className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
-                >
-                  Register
-                </Link>
-              </li>
+              {isAuthenticated ? (
+                <>
+                  <li>
+                    <Link
+                      href="/notes/filter/all"
+                      className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
+                    >
+                      Notes
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/profile"
+                      className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
+                    >
+                      {user?.email}
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link
+                      href="/sign-in"
+                      className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/sign-up"
+                      className="px-4 py-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200 font-medium"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </nav>
         </div>

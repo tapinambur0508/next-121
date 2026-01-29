@@ -6,6 +6,7 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 import TanstackProvider from "@/components/TanstackProvider/TanstackProvider";
 
 const geistSans = Geist({
@@ -43,14 +44,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased`}
       >
         <TanstackProvider>
-          <Header />
+          <AuthProvider>
+            <Header />
 
-          <div className="container mx-auto my-2">
-            {children}
-            {modal}
-          </div>
+            <div className="container mx-auto my-2">
+              {children}
+              {modal}
+            </div>
 
-          <Footer />
+            <Footer />
+          </AuthProvider>
         </TanstackProvider>
       </body>
     </html>
